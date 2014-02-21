@@ -43,14 +43,45 @@ void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 {
 	LinkedList *list=createLinkedList();
 	Element *tempElement;
+	//Test when the linked list was nothing inside.
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(0,list->length);
+	
+	//Add one data to the linked list and remove the data.
 	List_Add(1,list); 
-	List_Add(2,list); 
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_NOT_NULL(tempElement);			//The pointer must contain the last element.
+	TEST_ASSERT_EQUAL(1,tempElement->data);		//The data should be the last data added to the linked list.
+	TEST_ASSERT_EQUAL(0,list->length);			//Since the only one data is removed , the length should be 0.
+	TEST_ASSERT_NULL(list->head);
+	TEST_ASSERT_NULL(list->tail);				//Head and tail will point to NULL since no data inside.
+	
+	//Add two data to the linked list 
+	List_Add(1,list);
+	List_Add(2,list);
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_EQUAL(2,tempElement->data);		//The element that returned should show the last data.
+	TEST_ASSERT_EQUAL(1,list->length);			//The length should be 1 , because only one data been removed.
+	TEST_ASSERT_EQUAL(list->head,list->tail);  //Test that the tail will point to the last remained data or not. 
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_EQUAL(1,tempElement->data);
+	TEST_ASSERT_EQUAL(0,list->length);
+	
+	//Add three data to the linked list 
+	List_Add(1,list);
+	List_Add(2,list);
 	List_Add(3,list);
 	tempElement = List_removeLast(list);
-	TEST_ASSERT_NOT_NULL(tempElement);
-	
+	TEST_ASSERT_EQUAL(3,tempElement->data);		//The element that returned should show the last data.
+	TEST_ASSERT_EQUAL(2,list->length);			//The length should be 1 , because only one data been removed.
+	TEST_ASSERT_EQUAL(list->head->next,list->tail);  //Test that the tail will point to the last remained data or not.
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_EQUAL(2,tempElement->data);
+	TEST_ASSERT_EQUAL(1,list->length);
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_EQUAL(1,tempElement->data);
+	TEST_ASSERT_EQUAL(0,list->length);
 }
 /*
 Helper function to dump Linked List
