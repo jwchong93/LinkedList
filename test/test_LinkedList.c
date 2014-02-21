@@ -20,26 +20,38 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 {
 	LinkedList *list;
 	list= createLinkedList();
-	List_add(8,list);  	//Add data 8 to the linked list.
+	List_Add(8,list);  	//Add data 8 to the linked list.
 	TEST_ASSERT_EQUAL(8,list->head->data);
 	TEST_ASSERT_EQUAL(1,list->length);
 	TEST_ASSERT_EQUAL(list->head,list->tail);	//Since there is only one data in the linked list, head and tail will contain same address.
 	TEST_ASSERT_NULL(list->head->next);
 	
 	//Add one more data to the linked list, where the data =9
-	List_add(9,list); 
+	List_Add(9,list); 
 	TEST_ASSERT_EQUAL(9,list->tail->data);
 	TEST_ASSERT_EQUAL(2,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
 	
 	//Add the third data to the list
-	List_add(14,list); 
+	List_Add(14,list); 
 	TEST_ASSERT_EQUAL(14,list->tail->data);
 	TEST_ASSERT_EQUAL(3,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
 }
 
-
+void test_List_removeLast_should_return_the_last_element_of_LinkedList()
+{
+	LinkedList *list=createLinkedList();
+	Element *tempElement;
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_NULL(tempElement);
+	List_Add(1,list); 
+	List_Add(2,list); 
+	List_Add(3,list);
+	tempElement = List_removeLast(list);
+	TEST_ASSERT_NOT_NULL(tempElement);
+	
+}
 /*
 Helper function to dump Linked List
 */
