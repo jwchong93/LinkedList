@@ -14,5 +14,8 @@ LinkedList  *createLinkedList()
 
 void List_add(int newdata , LinkedList *list)
 {
-
+	Element *newElement= malloc(sizeof (Element));
+	list->head = newElement;
+	newElement->next = NULL;
+	newElement->data = newdata;
 }
