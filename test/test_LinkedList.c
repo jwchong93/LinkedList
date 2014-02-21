@@ -16,12 +16,15 @@ void test_createLinkedList_should_return_LinkedList_object()
 	
 }
 
-void test_List_add_should_add_a_new_element_to_the_end_of_the_LinkedList()
+void test_List_add_should_add_a_new_element_to_the_LinkedList()
 {
 	LinkedList *list;
 	list= createLinkedList();
-	List_add(8,list);  //Add data 8 to the linked list.
+	List_add(8,list);  	//Add data 8 to the linked list.
 	TEST_ASSERT_EQUAL(8,list->head->data);
+	TEST_ASSERT_EQUAL(1,list->length);
+	TEST_ASSERT_EQUAL(list->head,list->tail);	//Since there is only one data in the linked list, head and tail will contain same address.
+	TEST_ASSERT_NULL(list->head->next);
 }
 /*
 Helper function to dump Linked List
