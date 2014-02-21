@@ -34,8 +34,25 @@ void List_Add(int newdata , LinkedList *list)
 
 Element *List_removeLast(LinkedList *list)
 {
+	Element *tempElement =list->tail;
+	int i;
 	if(list->head == NULL && list->tail == NULL)
 	return NULL;
 	else if(list->head==list->tail)
-	return list->tail;
+	{		
+		list->head = list->tail = NULL;
+		list->length = list->length-1;
+		return tempElement;
+	}
+	else
+	{
+		list->tail = list->head;
+		for(i=3;i<=list->length;i++)
+		{
+			list->tail=list->tail->next;
+		}
+		list->length = list->length-1;
+		return tempElement;
+	}
+	
 }
