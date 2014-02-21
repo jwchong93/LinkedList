@@ -14,9 +14,21 @@ LinkedList  *createLinkedList()
 
 void List_add(int newdata , LinkedList *list)
 {
+	int i;
 	Element *newElement= malloc(sizeof (Element));
-	list->head = list->tail = newElement;
-	list->length = list->length +1;
-	newElement->next = NULL;
-	newElement->data = newdata;
+	if(list->head == NULL)
+	{
+		list->head = list->tail = newElement;
+	}
+	else
+	{
+		//Get the latest element block by reference to the tail
+		list->tail->next = newElement;
+		list->tail = newElement;
+		
+	}
+		list->length = list->length +1;
+		newElement->next = NULL;
+		newElement->data = newdata;
+		
 }

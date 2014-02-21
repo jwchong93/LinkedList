@@ -25,7 +25,21 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 	TEST_ASSERT_EQUAL(1,list->length);
 	TEST_ASSERT_EQUAL(list->head,list->tail);	//Since there is only one data in the linked list, head and tail will contain same address.
 	TEST_ASSERT_NULL(list->head->next);
+	
+	//Add one more data to the linked list, where the data =9
+	List_add(9,list); 
+	TEST_ASSERT_EQUAL(9,list->tail->data);
+	TEST_ASSERT_EQUAL(2,list->length);
+	TEST_ASSERT_NULL(list->tail->next);
+	
+	//Add the third data to the list
+	List_add(14,list); 
+	TEST_ASSERT_EQUAL(14,list->tail->data);
+	TEST_ASSERT_EQUAL(3,list->length);
+	TEST_ASSERT_NULL(list->tail->next);
 }
+
+
 /*
 Helper function to dump Linked List
 */
