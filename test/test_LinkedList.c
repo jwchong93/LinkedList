@@ -16,9 +16,17 @@ void test_createLinkedList_should_return_LinkedList_object()
 	
 }
 
+void test_List_add_should_add_a_new_element_to_the_end_of_the_LinkedList()
+{
+	LinkedList *list;
+	list= createLinkedList();
+	List_add(8,list);  //Add data 8 to the linked list.
+	TEST_ASSERT_EQUAL(8,list->head->data);
+}
 /*
 Helper function to dump Linked List
 */
+/*
 void dumpLinkedList(LinkedList *list)
 {
 	Element *elem;
@@ -29,6 +37,7 @@ void dumpLinkedList(LinkedList *list)
 	}
 }
 
+
 void test_no_test_but_playing_around()
 {
 	LinkedList *list = createLinkedList();
@@ -38,8 +47,8 @@ void test_no_test_but_playing_around()
 						{NULL,3}};
 	*/
 	//The following is the alternative way to initialize.
-	//To prevent data vbeen initialize wrongly.
-	
+	//To prevent data been initialize wrongly.
+/*	
 	Element arrayElem[3]={{.next=&arrayElem[1],.data=1},
 						{.next=&arrayElem[2],.data=2},
 						{.next=NULL,.data=3}};
@@ -50,3 +59,4 @@ void test_no_test_but_playing_around()
 	dumpLinkedList(list);
 
 }
+*/

@@ -15,5 +15,6 @@ typedef struct
 }LinkedList;
 
 LinkedList  *createLinkedList();
+void List_add(int newdata , LinkedList *list);
 
 #endif //__LINKED_LIST_H__

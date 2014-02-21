@@ -1,6 +1,7 @@
 #include "LinkedLIst.h"
 #include <stdio.h>
 #include <malloc.h>
+
 LinkedList  *createLinkedList()
 {
 
@@ -9,4 +10,9 @@ LinkedList  *createLinkedList()
 	list->tail = NULL;
 	list->length = 0;
 	return list;
+}
+
+void List_add(int newdata , LinkedList *list)
+{
+
 }
