@@ -12,10 +12,8 @@ LinkedList  *createLinkedList()
 	return list;
 }
 
-void List_Add(int newdata , LinkedList *list)
+void List_Add(Element *newElement , LinkedList *list)
 {
-	int i;
-	Element *newElement= malloc(sizeof (Element));
 	if(list->head == NULL)
 	{
 		list->head = list->tail = newElement;
@@ -28,7 +26,6 @@ void List_Add(int newdata , LinkedList *list)
 	}
 		list->length = list->length+1;
 		newElement->next = NULL;
-		newElement->data = newdata;
 		
 }
 
@@ -40,7 +37,8 @@ Element *List_removeLast(LinkedList *list)
 	return NULL;
 	else if(list->head==list->tail)
 	{		
-		list->head = list->tail = NULL;
+		list->head = NULL;
+		list->tail = NULL;
 		list->length = list->length-1;
 		return tempElement;
 	}
@@ -54,5 +52,4 @@ Element *List_removeLast(LinkedList *list)
 		list->length = list->length-1;
 		return tempElement;
 	}
-	
 }

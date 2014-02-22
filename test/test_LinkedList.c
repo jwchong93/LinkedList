@@ -1,6 +1,6 @@
 #include "unity.h"
 #include "LinkedList.h"
-
+#include <malloc.h>
 void setUp (){}
 void tearDown (){}
 
@@ -20,20 +20,24 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 {
 	LinkedList *list;
 	list= createLinkedList();
-	List_Add(8,list);  	//Add data 8 to the linked list.
+	Element *testElement = malloc(sizeof(Element));
+	testElement->data =8;  //Add the data 8 to the element.
+	List_Add(testElement,list);  	//Add the element to linked list.
 	TEST_ASSERT_EQUAL(8,list->head->data);
 	TEST_ASSERT_EQUAL(1,list->length);
 	TEST_ASSERT_EQUAL(list->head,list->tail);	//Since there is only one data in the linked list, head and tail will contain same address.
 	TEST_ASSERT_NULL(list->head->next);
 	
 	//Add one more data to the linked list, where the data =9
-	List_Add(9,list); 
+	testElement->data =9;
+	List_Add(testElement,list); 
 	TEST_ASSERT_EQUAL(9,list->tail->data);
 	TEST_ASSERT_EQUAL(2,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
 	
 	//Add the third data to the list
-	List_Add(14,list); 
+	testElement->data =14;
+	List_Add(testElement,list); 
 	TEST_ASSERT_EQUAL(14,list->tail->data);
 	TEST_ASSERT_EQUAL(3,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
@@ -43,13 +47,17 @@ void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 {
 	LinkedList *list=createLinkedList();
 	Element *tempElement;
+	Element *testElement = malloc(sizeof(Element));
+	Element *testElement2 = malloc(sizeof(Element));
+	Element *testElement3 = malloc(sizeof(Element));
 	//Test when the linked list was nothing inside.
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_NULL(tempElement);
 	TEST_ASSERT_EQUAL(0,list->length);
 	
 	//Add one data to the linked list and remove the data.
-	List_Add(1,list); 
+	testElement->data=1;
+	List_Add(testElement,list); 
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_NOT_NULL(tempElement);			//The pointer must contain the last element.
 	TEST_ASSERT_EQUAL(1,tempElement->data);		//The data should be the last data added to the linked list.
@@ -58,20 +66,26 @@ void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 	TEST_ASSERT_NULL(list->tail);				//Head and tail will point to NULL since no data inside.
 	
 	//Add two data to the linked list 
-	List_Add(1,list);
-	List_Add(2,list);
+	testElement->data=1;
+	List_Add(testElement,list); 
+	testElement2->data=2;
+	List_Add(testElement2,list); 
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_EQUAL(2,tempElement->data);		//The element that returned should show the last data.
 	TEST_ASSERT_EQUAL(1,list->length);			//The length should be 1 , because only one data been removed.
-	TEST_ASSERT_EQUAL(list->head,list->tail);  //Test that the tail will point to the last remained data or not. 
+	TEST_ASSERT_EQUAL(list->head,list->tail);  //Test that the tail will point to the last remained data or not.
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_EQUAL(1,tempElement->data);
 	TEST_ASSERT_EQUAL(0,list->length);
-	
+
+			
 	//Add three data to the linked list 
-	List_Add(1,list);
-	List_Add(2,list);
-	List_Add(3,list);
+	testElement->data=1;
+	List_Add(testElement,list);	
+	testElement2->data=2;
+	List_Add(testElement2,list);
+	testElement3->data=3;
+	List_Add(testElement3,list);
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_EQUAL(3,tempElement->data);		//The element that returned should show the last data.
 	TEST_ASSERT_EQUAL(2,list->length);			//The length should be 1 , because only one data been removed.

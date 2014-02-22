@@ -15,7 +15,7 @@ typedef struct
 }LinkedList;
 
 LinkedList  *createLinkedList();
-void List_Add(int newdata , LinkedList *list);
+void List_Add(Element *newElement , LinkedList *list);
 Element *List_removeLast(LinkedList *list);
 
 #endif //__LINKED_LIST_H__
