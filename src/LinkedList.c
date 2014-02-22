@@ -24,7 +24,7 @@ void List_Add(Element *newElement , LinkedList *list)
 		list->tail->next = newElement;
 		list->tail = newElement;
 	}
-		list->length = list->length+1;
+		list->length++;
 		newElement->next = NULL;
 		
 }
@@ -49,7 +49,22 @@ Element *List_removeLast(LinkedList *list)
 		{
 			list->tail=list->tail->next;
 		}
-		list->length = list->length-1;
+		list->length--;
 		return tempElement;
 	}
+}
+
+Element List_addFirst(Element *newElement,LinkedList *list)
+{
+	if(list->head == NULL && list->tail == NULL)
+	{
+		list->head = list->tail = newElement;
+		newElement -> next = NULL;
+	}
+	else
+	{
+		newElement->next=list->head;
+		list->head=newElement;
+	}
+	list->length++;
 }
