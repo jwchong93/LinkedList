@@ -45,7 +45,7 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 
 void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 {
-	LinkedList *list=createLinkedList();
+	LinkedList *list = createLinkedList();
 	Element *tempElement;
 	Element *testElement = malloc(sizeof(Element));
 	Element *testElement2 = malloc(sizeof(Element));
@@ -96,6 +96,52 @@ void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_EQUAL(1,tempElement->data);
 	TEST_ASSERT_EQUAL(0,list->length);
+}
+
+void test_List_addFirst_should_add_element_the_the_first_location_of_the_LinkedList()
+{
+	Element *testElement = malloc(sizeof(Element));
+	Element *testElement2 = malloc(sizeof(Element));
+	Element *testElement3 = malloc(sizeof(Element));
+	Element *tempElement = malloc(sizeof(Element));
+	LinkedList *list = createLinkedList();
+	
+	//Make sure element will store in the linked list. 
+	testElement->data = 8;
+	List_addFirst(testElement,list);
+	TEST_ASSERT_EQUAL(1,list->length);
+	TEST_ASSERT_EQUAL(8,list->head->data);
+	TEST_ASSERT_EQUAL(8,list->tail->data);
+	//Since only one element inside the linked list, tail should point to the same location.
+	TEST_ASSERT_EQUAL(list->head,list->tail);
+	
+	//Add one more element into the linked list. 
+	testElement2->data = 18;
+	List_addFirst(testElement2,list);
+	TEST_ASSERT_EQUAL(2,list->length);
+	
+	//Try to remove the first input, which data=8;
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_EQUAL(8,tempElement->data);
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_EQUAL(18,tempElement->data);
+	
+	//Add three data into the linked list.
+	testElement3->data=118;
+	List_addFirst(testElement,list);
+	TEST_ASSERT_EQUAL(1,list->length);
+	List_addFirst(testElement2,list);
+	TEST_ASSERT_EQUAL(2,list->length);
+	List_addFirst(testElement3,list);
+	TEST_ASSERT_EQUAL(3,list->length);
+	
+	//Try to remove all the data and test the sequence.
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_EQUAL(8,tempElement->data);
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_EQUAL(18,tempElement->data);
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_EQUAL(118,tempElement->data);
 }
 /*
 Helper function to dump Linked List
