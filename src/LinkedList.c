@@ -39,8 +39,6 @@ Element *List_removeLast(LinkedList *list)
 	{		
 		list->head = NULL;
 		list->tail = NULL;
-		list->length = list->length-1;
-		return tempElement;
 	}
 	else
 	{
@@ -49,9 +47,9 @@ Element *List_removeLast(LinkedList *list)
 		{
 			list->tail=list->tail->next;
 		}
-		list->length--;
-		return tempElement;
 	}
+	list->length--;
+	return tempElement;
 }
 
 Element List_addFirst(Element *newElement,LinkedList *list)
@@ -67,4 +65,24 @@ Element List_addFirst(Element *newElement,LinkedList *list)
 		list->head=newElement;
 	}
 	list->length++;
+}
+
+Element *List_removeFirst(LinkedList *list)
+{
+	Element *tempElement;
+	
+	if(list->head == NULL && list->tail == NULL)
+		return NULL;
+	if(list->head==list->tail)
+	{
+		tempElement =list->head;
+		list->head=list->tail = NULL;	
+	}
+	else
+	{
+		tempElement =list->head ;
+		list->head=list->head->next;
+	}
+	list->length--;
+	return tempElement;
 }

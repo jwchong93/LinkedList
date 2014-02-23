@@ -18,5 +18,6 @@ LinkedList  *createLinkedList();
 void List_Add(Element *newElement , LinkedList *list);
 Element *List_removeLast(LinkedList *list);
 Element List_addFirst(Element *newElement,LinkedList *list);
+Element *List_removeFirst(LinkedList *list);
 
 #endif //__LINKED_LIST_H__
