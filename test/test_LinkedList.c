@@ -21,6 +21,8 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 	LinkedList *list;
 	list= createLinkedList();
 	Element *testElement = malloc(sizeof(Element));
+	Element *testElement2 = malloc(sizeof(Element));
+	Element *testElement3 = malloc(sizeof(Element));
 	testElement->data =8;  //Add the data 8 to the element.
 	List_Add(testElement,list);  	//Add the element to linked list.
 	TEST_ASSERT_EQUAL(8,list->head->data);
@@ -29,15 +31,15 @@ void test_List_add_should_add_a_new_element_to_the_LinkedList()
 	TEST_ASSERT_NULL(list->head->next);
 	
 	//Add one more data to the linked list, where the data =9
-	testElement->data =9;
-	List_Add(testElement,list); 
+	testElement2->data =9;
+	List_Add(testElement2,list); 
 	TEST_ASSERT_EQUAL(9,list->tail->data);
 	TEST_ASSERT_EQUAL(2,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
 	
 	//Add the third data to the list
-	testElement->data =14;
-	List_Add(testElement,list); 
+	testElement3->data =14;
+	List_Add(testElement3,list); 
 	TEST_ASSERT_EQUAL(14,list->tail->data);
 	TEST_ASSERT_EQUAL(3,list->length);
 	TEST_ASSERT_NULL(list->tail->next);
@@ -96,6 +98,17 @@ void test_List_removeLast_should_return_the_last_element_of_LinkedList()
 	tempElement = List_removeLast(list);
 	TEST_ASSERT_EQUAL(1,tempElement->data);
 	TEST_ASSERT_EQUAL(0,list->length);
+	
+	//Try to remove again and check the returned data is NULL or not.
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(0,list->length);
+	tempElement=List_removeLast(list);
+	TEST_ASSERT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(0,list->length);
+
+	
+	
 }
 
 void test_List_addFirst_should_add_element_the_the_first_location_of_the_LinkedList()
@@ -142,7 +155,51 @@ void test_List_addFirst_should_add_element_the_the_first_location_of_the_LinkedL
 	TEST_ASSERT_EQUAL(18,tempElement->data);
 	tempElement=List_removeLast(list);
 	TEST_ASSERT_EQUAL(118,tempElement->data);
+	
 }
+
+void test_List_removeFirst_should_remove_the_first_data_in_the_linked_list()
+{
+	Element *testElement = malloc(sizeof(Element));
+	Element *testElement2 = malloc(sizeof(Element));
+	Element *testElement3 = malloc(sizeof(Element));
+	Element *tempElement = malloc(sizeof(Element));
+	LinkedList *list = createLinkedList();
+	
+	//If there are no data, function should return NULL.
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_NULL(tempElement);
+	
+	//Add three element into the linked list.
+	testElement->data =1;
+	List_Add(testElement,list);
+	testElement2->data =2;
+	List_Add(testElement2,list); 
+	testElement3->data =3;
+	List_Add(testElement3,list);
+	
+	//Remove the first data and test the data is equal = 1(first data) or not.
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_NOT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(1,tempElement->data);
+	TEST_ASSERT_EQUAL(2,list->length);
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_EQUAL(2,tempElement->data);   //Test the returned data is 2(second position).
+	TEST_ASSERT_EQUAL(1,list->length);
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_EQUAL(3,tempElement->data);
+	TEST_ASSERT_EQUAL(0,list->length);
+	
+	//Since there is no data left, the function should return a NULL
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(0,list->length);	
+	tempElement = List_removeFirst(list);
+	TEST_ASSERT_NULL(tempElement);
+	TEST_ASSERT_EQUAL(0,list->length);
+	
+}
+
 /*
 Helper function to dump Linked List
 */
