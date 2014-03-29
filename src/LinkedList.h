@@ -4,7 +4,7 @@
 typedef struct Element_t
 {
 	struct Element_t *next;
-	int data;
+	void *data;
 }Element;
 
 typedef struct
