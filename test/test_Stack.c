@@ -34,12 +34,11 @@ void test_push_should_push_in_the_data_address_into_the_stack()
 	
 	push(newStack,&testElement1);
 	//Make sure the address of testElement1 is on topOfStack
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->data);
 	
 	//Try to push one more and test.
 	push(newStack,&testElement2);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->data);
 	destroyStack(newStack);
 }
 
@@ -66,6 +65,17 @@ void test_pop_will_pop_accordingly()
 	destroyStack(newStack);
 }
 
+void test_pop_will_return_error_while_the_stack_is_empty()
+{
+	Stack *newStack = createStack();
+	Element *tempElement;
+	//testElement2 should come out 1st. 
+	tempElement = (Element*)pop(newStack);
+	TEST_ASSERT_NULL(tempElement);
+
+	destroyStack(newStack);
+}
+
 void test_stack_will_follow_FILO_rule_for_three_elements()
 {
 	Stack *newStack = createStack();
@@ -84,18 +94,18 @@ void test_stack_will_follow_FILO_rule_for_three_elements()
 	
 	push(newStack,&testElement1);
 	//Make sure the address of testElement1 is on topOfStack
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->data);
 	
 	//Try to push one more and test.
 	push(newStack,&testElement2);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->data);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->data);
 	
 	//Push the last one.
 	push(newStack,&testElement3);
-	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next);
+	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack->data);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next->data);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next->data);
 	
 	
 	//testElement3 should come out 1st. 
@@ -132,24 +142,24 @@ void test_stack_will_follow_FILO_rule_for_four_elements()
 	
 	push(newStack,&testElement1);
 	//Make sure the address of testElement1 is on topOfStack
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->data);
 	
 	//Try to push one more and test.
 	push(newStack,&testElement2);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->data);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->data);
 
 	
 	push(newStack,&testElement3);
-	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next);
+	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack->data);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next->data);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next->data);
 	
 	push(newStack,&testElement4);
-	TEST_ASSERT_EQUAL(&testElement4,newStack->topOfStack);
-	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack->next);
-	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next->next);
-	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next->next);
+	TEST_ASSERT_EQUAL(&testElement4,newStack->topOfStack->data);
+	TEST_ASSERT_EQUAL(&testElement3,newStack->topOfStack->next->data);
+	TEST_ASSERT_EQUAL(&testElement2,newStack->topOfStack->next->next->data);
+	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->next->next->next->data);
 	
 	
 	//testElement4 should come out 1st. 

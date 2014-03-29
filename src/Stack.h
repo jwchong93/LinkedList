@@ -10,5 +10,5 @@ typedef struct
 Stack *createStack();
 void destroyStack(Stack *stack);
 void *pop(Stack*stack);
-void push(Stack *stack,Element *data);
+void push(Stack *stack,void *data);
 #endif // Stack_H
