@@ -86,3 +86,23 @@ Element *List_removeFirst(LinkedList *list)
 	list->length--;
 	return tempElement;
 }
+
+void List_DestroyList(LinkedList *list)
+{
+	Element *tempElement;
+	tempElement = list->head;
+	while(tempElement!=NULL)
+	{
+		tempElement = tempElement->next;
+	}
+}
+
+
+
+
+
+
+
+
+
+
