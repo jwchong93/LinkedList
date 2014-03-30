@@ -89,13 +89,12 @@ Element *List_removeFirst(LinkedList *list)
 
 void List_DestroyList(LinkedList *list)
 {
-	Element *tempElement,*destroyElement;
-	tempElement = list->head;
-	while(tempElement!=NULL)
+	Element *tempElement;
+	int i;
+	while(list->head!=NULL)
 	{	
-		destroyElement=tempElement;
-		tempElement = tempElement->next;
-		free(destroyElement);
+		tempElement=List_removeLast(list);
+		free(tempElement);
 	}
 }
 

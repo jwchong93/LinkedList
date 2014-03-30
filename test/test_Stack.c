@@ -35,6 +35,7 @@ void test_push_should_push_in_the_data_address_into_the_stack()
 	push(newStack,&testElement1);
 	//Make sure the address of testElement1 is on topOfStack
 	TEST_ASSERT_EQUAL(&testElement1,newStack->topOfStack->data);
+	TEST_ASSERT_NOT_NULL(newStack->topOfStack);
 	
 	//Try to push one more and test.
 	push(newStack,&testElement2);
