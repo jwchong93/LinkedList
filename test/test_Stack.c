@@ -181,6 +181,26 @@ void test_stack_will_follow_FILO_rule_for_four_elements()
 	destroyStack(newStack);
 }
 
+void test_stack_will_follow_FILO_rule_for_four_int_address()
+{
+	Stack *newStack = createStack();
+	int num1=100,num2=200,num3=300,num4=400;
+	int *testNum;
+	push(newStack,&num1);
+	push(newStack,&num2);
+	push(newStack,&num3);
+	push(newStack,&num4);
+	
+	testNum = pop(newStack);
+	TEST_ASSERT_EQUAL(400,*testNum);
+	testNum = pop(newStack);
+	TEST_ASSERT_EQUAL(300,*testNum);
+	testNum = pop(newStack);
+	TEST_ASSERT_EQUAL(200,*testNum);
+	testNum = pop(newStack);
+	TEST_ASSERT_EQUAL(100,*testNum);
+	destroyStack(newStack);
+}
 void test_stack_will_follow_FILO_rule_with_1000_elements()
 {
 	Stack *newStack = createStack();
